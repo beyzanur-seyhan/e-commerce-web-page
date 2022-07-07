@@ -43,12 +43,14 @@ This project is my individual project in the "Front-End Developer" Bootcamp prog
 ## Parts From The Project
 
 ### Add To Cart
-
-![Add-To-Cart]()
+<br>
+<img src="https://github.com/beyzanur-seyhan/e-commerce-web-page/blob/main/readme-files/views/add-to-cart.gif?raw=true" width="70%">
+<br><br>
 
 ### Sign In & Register
-
-![Sign-In-And-Register]()
+<br>
+<img src="https://github.com/beyzanur-seyhan/e-commerce-web-page/blob/main/readme-files/views/signIn-register.gif?raw=true" width="70%">
+<br> <br>
 
 ## Getting Started
 
