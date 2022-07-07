@@ -1,0 +1,71 @@
+.d-none {
+    display: none;
+}
+
+.sign-in, .register {
+    position: absolute;
+    background-color: #f9f9f9;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+
+}
+
+.sign-in-content, .register-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    top: 35%;
+    left: 40%;
+    width: 25%;
+}
+
+.exit {
+    position: absolute;
+    right: 35%;
+    top: 20%;
+    width: 30px;
+    padding: 6px;
+    background-color: #557093;
+    color: white;
+    border: none;
+}
+
+ input {
+    border: 2px solid #557093;
+    padding: 12px;
+    background-color: white;
+    color: #557093;
+}
+
+ input::placeholder {
+    color: #557093;
+}
+
+.validation {
+    display: flex;
+}
+
+.message {
+    margin-left: auto;
+}
+
+.err-msg {
+    color: red;
+}
+
+.validation button {
+    align-self: flex-start;
+    padding: 6px;
+    width: 24%;
+    border: 2px solid #557093;
+    background-color: #557093;
+    color: white;
+}
+
+.user-name{
+    background-color: #557093;
+    padding: 0 6px;
+
+}
