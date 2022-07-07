@@ -4,15 +4,6 @@ var allLanguages = ["English", "Español", "Filipino", "Français", "العرب�
 
 filterSearch = ["All", "option01", "option02", "option03", "option04", "option05"];
 
-var allUsers = [
-    {
-        name: "Beyzanur",
-        surname: "Seyhan",
-        mail: "info@beyzanur.com",
-        password: "123",
-    },
-];
-
 var allShoppingList = [
     {
         img: "assets/images/header/cart-items/item1",
@@ -388,15 +379,7 @@ function SıgnIn(event) {
 
     event.preventDefault();
 
-    if (
-        IsEmptyUserData(
-            iName.value,
-            iSurname.value,
-            iMail.value,
-            iPassword.value,
-            iRePassword.value
-        )
-    ) {
+    if (IsEmptyUserData(iName.value, iSurname.value, iMail.value, iPassword.value, iRePassword.value)) {
         return;
     }
 
