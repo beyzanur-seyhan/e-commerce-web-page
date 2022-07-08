@@ -22,9 +22,9 @@ This project is my individual project in the "Front-End Developer" Bootcamp prog
 
 ▶️ [Live Demo](https://beyzanur-seyhan.github.io/e-commerce-web-page/) ▶ Check out how the project looks
 
-- The theme of this project is prepared before UI Kit template. (ShopGrids)
+- The theme of this project is prepared before UI Kit template. ([ShopGrids](https://graygrids.com/templates/shopgrids-bootstrap-ecommerce/))
 - Necessary actions have been made for a single page. (Home page)
-- I added index.js and index.css files.
+- I added [index.js](https://github.com/beyzanur-seyhan/e-commerce-web-page/blob/main/assets/js/index.js) and [index.css](https://github.com/beyzanur-seyhan/e-commerce-web-page/blob/main/assets/css/index.css) files.
 
 ## What I Learned
 
