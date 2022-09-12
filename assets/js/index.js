@@ -2,8 +2,6 @@ var allCurrency = ["$ USD", "€ EURO", "$ CAD", ">₹ INR", "¥ CNY", "৳ BDT"
 
 var allLanguages = ["English", "Español", "Filipino", "Français", "العربية", "हिन्दी", "বাংলা"];
 
-filterSearch = ["All", "option01", "option02", "option03", "option04", "option05"];
-
 var allShoppingList = [
     {
         img: "assets/images/header/cart-items/item1",
@@ -22,14 +20,13 @@ var allShoppingList = [
 
 var allNavCategories = ["Electronics","accessories","Televisions","best selling","top 100 offer","sunglass","watch","man’s product","Home Audio & Theater","Computers & Tablets","Video Games","Home Appliances"];
 
-var sideProducts = [
-    {
-        img: "assets/images/hero/slider-bnr.jpg",
-        title: "New line required",
-        name: "iPhone 12 Pro Max",
-        price: 259.99,
-    },
-];
+var sideProducts = {
+    img: "assets/images/hero/slider-bnr.jpg",
+    title: "New line required",
+    name: "iPhone 12 Pro Max",
+    price: 259.99,
+};
+
 
 var allSaleProducts = {
     trends: [
@@ -120,131 +117,102 @@ var allSaleProducts = {
 
 function LoadDataOnPage() {
     
-    var preLoader = document.getElementById("preLoader");
-    var curreny = document.getElementById("select4");
-    var language = document.getElementById("select5");
-    var filter = document.getElementById("select1");
-    var cart = document.getElementById("shopping-list");
-    var categories = document.getElementById("sub-category");
-    var sideFeatures = document.getElementsByClassName("hero-banner");
-    var trends = document.getElementsByClassName("single-product");
-    var others = document.getElementsByClassName("single-banner");
+    var dvPreLoader = document.getElementById("preLoader");
+    var scltCurreny = document.getElementById("select4");
+    var scltLanguage = document.getElementById("select5");
+    var ulCart = document.getElementById("shopping-list");
+    var ulCategories = document.getElementById("sub-category");
+    var dvSideFeatures = document.getElementsByClassName("hero-banner");
+    var dvTrends = document.getElementById("all-trend-product");
+    var dvOthers = document.getElementById("other-products");
 
-    if (preLoader.innerHTML !== undefined) {
-        preLoader.className = "d-none";
+    if (dvPreLoader.innerHTML !== undefined) {
+        dvPreLoader.className = "d-none";
     }
 
-    if (preLoader.className === "d-none") {
+    if (dvPreLoader.className === "d-none") {
         if (allCurrency.length !== 0) {
-            GenerateHTMLElement(allCurrency, curreny, "option");
+            GenerateOptionElem(allCurrency, scltCurreny, "<option>");
         }
 
         if (allLanguages.length !== 0) {
-            GenerateHTMLElement(allLanguages, language, "option");
-        }
-
-        if (filterSearch.length !== 0) {
-            GenerateHTMLElement(filterSearch, filter, "option");
+            GenerateOptionElem(allLanguages, scltLanguage, "<option>");
         }
 
         if (allShoppingList.length !== 0) {
-            GenerateHTMLElement(allShoppingList, cart, "li");
+            GenerateShopListItem(allShoppingList, ulCart, "<li>");
         }
 
         if (allNavCategories.length !== 0) {
-            GenerateHTMLElement(allNavCategories, categories, "li");
+            GenerateNavElem(allNavCategories, ulCategories, "<li>");
         }
 
         if (sideProducts.length !== 0) {
-            GenerateHTMLElement(sideProducts, sideFeatures);
+            GenerateSideProduct(sideProducts, dvSideFeatures);
         }
 
         if (allSaleProducts.trends.length !== 0) {
-            GenerateHTMLElement(allSaleProducts.trends, trends);
+            GenerateTrendProduct(allSaleProducts.trends, dvTrends, "<div class='col-lg-3 col-md-6 col-12'>");
         }
 
         if (allSaleProducts.others.length !== 0) {
-            GenerateHTMLElement(allSaleProducts.others, others);
+            GenerateOtherProduct(allSaleProducts.others, dvOthers, "<div class='col-lg-6 col-md-6 col-12'>");
         }
     }
 }
 
-function GenerateHTMLElement(data, parentElem, child) {
-    
-    var productCount = document.getElementById("total-product");
+function GenerateOptionElem(allDataList, parentElem, childElem){
+    allDataList.forEach((data) => {
+        parentElem.innerHTML += childElem + data;
+    });
+}
+
+function GenerateShopListItem(allShoppingList, parentElem, childElem){
     var productCountItems = document.getElementById("total-product-items");
     var totalPrice = document.getElementById("total-amount");
-    var removeProduct =
-        '<a href="javascript:void(0)" class="remove" title="Remove this item"><i class="lni lni-close"></i></a>';
+    var spanTotalCard = document.getElementById("total-product");
+    var removeProduct = '<a href="javascript:void(0)" class="remove" title="Remove this item"><i class="lni lni-close"></i></a>';
 
-    parentElem.innerHTML = "";
+    spanTotalCard.innerText = CountProductList(allShoppingList);
+    productCountItems.innerText = CountProductList(allShoppingList);
+    totalPrice.innerText = TotalProductListPrice(allShoppingList);
+    
+    allShoppingList.forEach((item) => {
+        parentElem.innerHTML += childElem + removeProduct +'<div class="cart-img-head">' +'<a class="cart-img" href="#">' +'<img src="' + item.img +'.jpg">' +"</a>" +"</div>" +'<div class="content"><h4><a href="#">' + item.name + "</a></h4>" +'<p class="quantity">' + TotalQuantityValue(item.quantity) + "x" +"- " +"$" +'<span class="price">' + item.price +".00</span></p></div>";
+    });
+}
 
-    if (parentElem.className === "shopping-list") {
-        
-        productCount.innerText = CountProductList(data);
-        productCountItems.innerText = CountProductList(data);
-        totalPrice.innerText = TotalProductListPrice(data);
-    }
+function GenerateNavElem(allCategoryList, parentElem, childElem){
+    allCategoryList.forEach((item) => {
+        parentElem.innerHTML += childElem + '<a href="#">' + item + "</a>";
+    });
+}
 
-    data.forEach((element, index, arr) => {
-        if (element !== "") {
-            var childElem = document.createElement(child);
+function GenerateSideProduct(sideProductData, parentElem){
+    parentElem[0].innerHTML = "<h2>" +"<span>" + sideProductData.title +"</span>" + sideProductData.name +"</h2>" +"<h3>" + sideProductData.price +"</h3>";
+}
 
-            if (child === "option" || child === "button") {
-                
-                childElem.innerHTML = element;
-                childElem.value = index;
-                parentElem.append(childElem);
-            } 
+function GenerateTrendProduct(allSaleProductList, parentElem, childElem){
+    allSaleProductList.forEach((product, index) => {
+
+        if(product.tag){
+            if(product.tag !== "New"){
+                parentElem.innerHTML += childElem + '<div class="single-product"><div class="product-image">' +'<img src="' + product.img + index +'.jpg">' +'<span class="sale-tag">' +"-" + product.tag +"%" +"</span>" +'<div class="button add-to-cart" id="' + index +'" onclick="AddToCart(' + index +');">' +'<a class="btn"><i class="lni lni-cart"></i> Add to Cart</a></div></div>' +'<div class="product-info"><span class="category">' + product.category +"</span>" +'<h4 class="title"><a href="#">' + product.name +'</a></h4><ul class="review">' + GenerateReviewElem(product.point) +"</ul>" +'<div class="price">' +"<span>" +"$" +(product.price - (product.price * product.tag) / 100) +".00" +"</span>" +'<span class="discount-price">' + "$" + product.price +".00" +"</span></div></div></div>";
+            }
             else {
-                childElem.id = index;
-
-                if (parentElem.className === "sub-category") {
-                    childElem.innerHTML = '<a href="#">' + element + "</a>";
-                    parentElem.append(childElem);
-                }
-                else if (parentElem.className === "shopping-list") {
-                    
-                    childElem.innerHTML =removeProduct +'<div class="cart-img-head">' +'<a class="cart-img" href="#">' +'<img src="' +element.img +'.jpg">' +"</a>" +"</div>" +'<div class="content"><h4><a href="#">' +element.name +"</a></h4>" +'<p class="quantity">' +TotalQuantityValue(element.quantity) +"x" +"- " +"$" +'<span class="price">' +element.price +".00</span></p></div>";
-                    parentElem.append(childElem);
-                }
-                else {
-                    if (parentElem[index].className === "content hero-banner") {
-                        parentElem[index].innerHTML ="<h2>" +"<span>" +element.title +"</span>" +element.name +"</h2>" +"<h3>" +element.price +"</h3>";
-                    }
-
-                    parentElem[index].id = index;
-
-                    if (parentElem[index].className === "single-product") {
-                        
-                        if (arr[index].tag !== undefined) {
-                            
-                            if (arr[index].tag !== "New") {
-                                
-                                parentElem[index].innerHTML ='<div class="product-image">' +'<img src="' +element.img +index +'.jpg">' +'<span class="sale-tag">' +"-" +arr[index].tag +"%" +"</span>" +'<div class="button add-to-cart" id="' +index +'" onclick="AddToCart(' +index +');">' +'<a class="btn"><i class="lni lni-cart"></i> Add to Cart</a></div></div>' +'<div class="product-info"><span class="category">' +element.category +"</span>" +'<h4 class="title"><a href="#">' +element.name +'</a></h4><ul class="review">' +GenerateReviewElem(arr[index].point) +"</ul>" +'<div class="price">' +"<span>" +"$" +(element.price - (element.price * element.tag) / 100) +".00" +"</span>" +'<span class="discount-price">' +"$" +element.price +".00" +"</span></div></div>";
-                            
-                            } 
-                            else {
-                                
-                                parentElem[index].innerHTML ='<div class="product-image">' +'<img src="' +element.img +index +'.jpg">' +'<span class="new-tag">' +arr[index].tag +"</span>" +'<div class="button add-to-cart" add-to-cart" id="' +index +'" onclick="AddToCart(' +index +');">' +'<a " class="btn"><i class="lni lni-cart"></i> Add to Cart</a></div></div>' +'<div class="product-info"><span class="category">' +element.category +"</span>" +'<h4 class="title"><a href="#">' +element.name +'</a></h4><ul class="review">' +GenerateReviewElem(arr[index].point) +"</ul>" +'<div class="price">' +"<span>" +"$" +element.price +".00" +"</span></div>";
-                            
-                            }
-                        } 
-                        else {
-                                
-                                parentElem[index].innerHTML ='<div class="product-image">' +'<img src="' +element.img +index +'.jpg">' +'<div class="button add-to-cart" id="' +index +'" onclick="AddToCart(' +index +');">' +'<a class="btn"><i class="lni lni-cart"></i> Add to Cart</a></div></div>' +'<div class="product-info"><span class="category">' +element.category +"</span>" +'<h4 class="title"><a href="#">' +element.name +'</a></h4><ul class="review">' +GenerateReviewElem(arr[index].point) +"</ul>" +'<div class="price">' +"<span>" +"$" +element.price +".00" +"</span></div>";
-                        
-                            }
-                    } 
-                    else if (parentElem[index].className === "single-banner" ||parentElem[index].className ==="single-banner custom-responsive-margin") {
-                             
-                                parentElem[index].style.backgroundImage = 'url("' + element.img + index + '-bg.jpg")'; 
-                             
-                                parentElem[index].innerHTML = '<div class="content"><h2>' + element.name + "</h2><p>" + element.desc + '</p><div class="button"><a class="btn">' + element.action + "</a></div></div>";
-                    }
-                }
+                parentElem.innerHTML += childElem + '<div class="single-product"><div class="product-image">' +'<img src="' + product.img + index +'.jpg">' +'<span class="new-tag">' + product.tag + "</span>" +'<div class="button add-to-cart" id="' + index +'" onclick="AddToCart(' + index +');">' +'<a class="btn"><i class="lni lni-cart"></i> Add to Cart</a></div></div>' +'<div class="product-info"><span class="category">' + product.category +"</span>" +'<h4 class="title"><a href="#">' + product.name +'</a></h4><ul class="review">' + GenerateReviewElem(product.point) +"</ul>" +'<div class="price">' +"<span>" +"$" + product.price +".00" +"</span></div></div></div>";
             }
         }
+
+        else {
+            parentElem.innerHTML += childElem + '<div class="single-product"><div class="product-image">' +'<img src="' + product.img + index +'.jpg">' + '<div class="button add-to-cart" id="' + index +'" onclick="AddToCart(' + index +');">' +'<a class="btn"><i class="lni lni-cart"></i> Add to Cart</a></div></div>' +'<div class="product-info"><span class="category">' + product.category +"</span>" +'<h4 class="title"><a href="#">' + product.name +'</a></h4><ul class="review">' + GenerateReviewElem(product.point) +"</ul>" +'<div class="price">' +"<span>" +"$" + product.price +".00" +"</span></div></div></div>";
+        }
+    });
+}
+
+function GenerateOtherProduct(allOtherList, parentElem, childElem){
+    allOtherList.forEach((product, index) => {
+        parentElem.innerHTML += childElem + `<div class="single-banner" style="background-image: url(assets/images/banner/banner-${index}-bg.jpg)"><div class="content"><h2> ${product.name} </h2><p> ${product.desc} </p><div class="button"><a class="btn"> ${product.action} </a></div></div></div>`;
     });
 }
 
@@ -279,11 +247,11 @@ function TotalProductListPrice(data) {
 }
 
 function AddToCart(index) {
-    var cart = document.getElementById("shopping-list");
-
     var addToProduct;
+    var ulCartList = document.getElementById("shopping-list");
+    ulCartList.innerHTML = "";
 
-    if ( allSaleProducts.trends[index].tag && allSaleProducts.trends[index].tag !== "New") {
+    if (allSaleProducts.trends[index].tag && allSaleProducts.trends[index].tag !== "New") {
         
         addToProduct = 
         {
@@ -295,8 +263,7 @@ function AddToCart(index) {
 
     } 
     else {
-        addToProduct = 
-        {
+        addToProduct = {
             img: allSaleProducts.trends[index].img + index,
             name: allSaleProducts.trends[index].name,
             price: allSaleProducts.trends[index].price,
@@ -304,17 +271,14 @@ function AddToCart(index) {
         };
     }
 
-    if (IsThereProduct(addToProduct)) {
-        
-        GenerateHTMLElement(allShoppingList, cart, "li");
+    if (IsThereProduct(addToProduct)) {        
+        GenerateShopListItem(allShoppingList, ulCartList, "<li>");
         return;
 
     } 
     else {
-        
         allShoppingList.push(addToProduct);
-        GenerateHTMLElement(allShoppingList, cart, "li");
-
+        GenerateShopListItem(allShoppingList, ulCartList, "<li>");
     }
 }
 
@@ -473,17 +437,15 @@ function Register(event) {
 
 function Exit() {
     
-    var userSıgnIn = document.getElementById("sign-in");
-    var userRegister = document.getElementById("register");
+    var dvUserSıgnIn = document.getElementById("sign-in");
+    var dvUserRegister = document.getElementById("register");
 
-    if (userSıgnIn.className === "sign-in") {
-        
-        userSıgnIn.className += " d-none";
+    if (dvUserSıgnIn.className === "sign-in") {
+        dvUserSıgnIn.className += " d-none";
     } 
     
-    else if (userRegister.className === "register") {
-        
-        userRegister.className += " d-none";
+    else if (dvUserRegister.className === "register") {
+        dvUserRegister.className += " d-none";
     }
     
     document.getElementById("eCommerceApp").style.overflow = "auto";
