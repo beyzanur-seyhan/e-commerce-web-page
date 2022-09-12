@@ -2,15 +2,19 @@
 
 ![View](https://raw.githubusercontent.com/beyzanur-seyhan/e-commerce-web-page/main/readme-files/views/start.gif)
 
-▶️ [What I Learned](#what-i-learned)
+- [What I Learned](#what-i-learned)
 
-▶️ [Used Languages Or Technologies](#used-languages-or-technologies)
+- [Used Languages Or Technologies](#used-languages-or-technologies)
 
-▶️ [Getting Started](#getting-started)
+- [Parts From The Project](#parts-from-the-project) <br/>
+    - [Add To Cart](#add-to-cart) <br/>
+    - [Sign In And Register](#sign-in-and-register)
 
-▶️ [License](#license)
+- [Getting Started](#getting-started)
 
-▶️ [Contact Me](#contact-me)
+- [License](#license)
+
+- [Contact Me](#contact-me)
 
 ...
 
@@ -47,7 +51,7 @@ This project is my individual project in the "Front-End Developer" Bootcamp prog
 <img src="https://github.com/beyzanur-seyhan/e-commerce-web-page/blob/main/readme-files/views/add-to-cart.gif?raw=true" width="70%">
 <br><br>
 
-### Sign In & Register
+### Sign In And Register
 <br>
 <img src="https://github.com/beyzanur-seyhan/e-commerce-web-page/blob/main/readme-files/views/signIn-register.gif?raw=true" width="70%">
 <br> <br>
